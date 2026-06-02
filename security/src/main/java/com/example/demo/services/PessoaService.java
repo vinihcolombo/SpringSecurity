@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service // Explica que estamos na camada Service
 public class PessoaService {
 
-    @Autowired
+    @Autowired // Autowired cria uma instância da classe chamada
     private PessoaRepository pessoaRepository;
 
     public List<PessoaModel> buscarTodosPessoas() { return pessoaRepository.findAll(); }

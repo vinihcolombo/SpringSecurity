@@ -8,13 +8,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserService implements UserDetailsService {
 
-    @Autowired
+    @Autowired // Autowired cria uma instância da classe chamada
     private UserRepository userRepository;
 
-    @Override
+    @Override // Altera o funcionamento do método herdado
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
         return  userRepository.findByLogin(username);
     }
-
 
 }

@@ -1,7 +1,6 @@
 package com.example.demo.models;
 
 import com.example.demo.enums.UserRole;
-import com.example.demo.repositories.PessoaRepository;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,46 +11,56 @@ import java.util.Collection;
 import java.util.List;
 
 
-@Entity
-@Table(name = "PESSOA")
-@Data
-public class User implements UserDetails {
+@Entity // Define a classe como uma entidade, criando uma tabela no banco
+@Table(name = "PESSOA") // Define o nome da tabela no banco de dados
+@Data // Gera Getter e Setter automaticamente
+public class UserModel implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Designa a variável como a coluna de ID no banco
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Meio no qual o ID será gerado
     private Long id;
     private String login;
     private String password;
     private UserRole role;
 
-    @Override
+    public UserModel(String login, String password, UserRole role){
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
+    public UserModel(){
+
+    }
+
+    @Override // Altera o funcionamento do método herdado
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ADMIN"),
                                                        new SimpleGrantedAuthority("USER"));
         else return List.of(new SimpleGrantedAuthority("USER"));
     }
 
-    @Override
+    @Override // Altera o funcionamento do método herdado
     public String getUsername() {
         return "";
     }
 
-    @Override
+    @Override // Altera o funcionamento do método herdado
     public boolean isAccountNonExpired() {
         return UserDetails.super.isAccountNonExpired();
     }
 
-    @Override
+    @Override // Altera o funcionamento do método herdado
     public boolean isAccountNonLocked() {
         return UserDetails.super.isAccountNonLocked();
     }
 
-    @Override
+    @Override // Altera o funcionamento do método herdado
     public boolean isCredentialsNonExpired() {
         return UserDetails.super.isCredentialsNonExpired();
     }
 
-    @Override
+    @Override // Altera o funcionamento do método herdado
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
