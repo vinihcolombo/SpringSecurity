@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service // Explica que estamos na camada Service
 public class PessoaService {
@@ -18,14 +19,14 @@ public class PessoaService {
 
     public PessoaModel criarPessoa(PessoaModel pessoaModel) { return pessoaRepository.save(pessoaModel); }
 
-    public Optional<PessoaModel> buscarPessoaId(Long id) { return pessoaRepository.findById(id); }
+    public Optional<PessoaModel> buscarPessoaId(UUID id) { return pessoaRepository.findById(id); }
 
-    public PessoaModel atualizarPessoa(Long id, PessoaModel PessoaModel) {
+    public PessoaModel atualizarPessoa(UUID id, PessoaModel PessoaModel) {
         PessoaModel model = pessoaRepository.findById(id).get();
         model.setNome(PessoaModel.getNome());
         return pessoaRepository.save(model);
     }
 
-    public void excluir(Long id) { pessoaRepository.deleteById(id);}
+    public void excluir(UUID id) { pessoaRepository.deleteById(id);}
 
 }

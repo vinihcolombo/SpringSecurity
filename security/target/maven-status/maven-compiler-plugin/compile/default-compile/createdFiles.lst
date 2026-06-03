@@ -1,0 +1,14 @@
+com/example/demo/repositories/UserRepository.class
+com/example/demo/services/PessoaService.class
+com/example/demo/repositories/PessoaRepository.class
+com/example/demo/controllers/PessoaController.class
+com/example/demo/models/JobModel.class
+com/example/demo/enums/UserRole.class
+com/example/demo/services/UserService.class
+com/example/demo/securities/SecurityConfiguration.class
+com/example/demo/controllers/AuthenticationController.class
+com/example/demo/models/AuthenticationDTO.class
+com/example/demo/DemoApplication.class
+com/example/demo/models/RegisterDTO.class
+com/example/demo/models/PessoaModel.class
+com/example/demo/models/UserModel.class

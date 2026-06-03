@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RequestMapping(path = "/pessoas") // Caminho usado para chegar à tabela
 @RestController // Diz que o controller será usado como REST
@@ -36,16 +37,16 @@ public class PessoaController {
     }
 
     @DeleteMapping("/{id}") // Notação para o comando DELETE no CRUD (deletar)
-    public ResponseEntity<?> deletar(@PathVariable Long id){ // PathVariable Pede um objeto que serve como caminho
+    public ResponseEntity<?> deletar(@PathVariable UUID id){ // PathVariable Pede um objeto que serve como caminho
         pessoaService.excluir(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}") // Notação para o comando de GET no CRUD (visualizar)
-    public Optional<PessoaModel> buscarPessoaPorId(@PathVariable Long id){ return pessoaService.buscarPessoaId(id); }
+    public Optional<PessoaModel> buscarPessoaPorId(@PathVariable UUID id){ return pessoaService.buscarPessoaId(id); }
 
     @PutMapping("/{id}") // Notação para o comando de PUT no CRUD (editar)
-    public ResponseEntity<PessoaModel> atualizar(@PathVariable Long id, @RequestBody PessoaModel pessoaModel){
+    public ResponseEntity<PessoaModel> atualizar(@PathVariable UUID id, @RequestBody PessoaModel pessoaModel){
         PessoaModel requisicao = pessoaService.atualizarPessoa(id,pessoaModel);
 
         return ResponseEntity.ok().body(requisicao);

@@ -20,13 +20,24 @@ public class SecurityConfiguration {
     @Bean // Carrega previamente, preparando para uso
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
 
+        /*
+        return httpSecurity
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth ->
+                        auth.anyRequest().permitAll()
+                )
+                .build();
+        */
+
+
         return httpSecurity.csrf(csrf -> csrf.disable()).
                 sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll() // permitAll faz com que qualquer um possa acessar
-                        .requestMatchers(HttpMethod.POST, "/pessoas").hasRole("ADMIN") //hasRole faz com que somente o cargo designado acesse
+                        .requestMatchers(HttpMethod.POST, "/pessoas").permitAll() //hasRole faz com que somente o cargo designado acesse
+                        .requestMatchers(HttpMethod.GET, "/pessoas/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();

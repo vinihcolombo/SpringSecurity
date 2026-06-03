@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity // Define a classe como uma entidade, criando uma tabela no banco
 @Table(name = "TBL_pessoa") // Define o nome da tabela no banco de dados
@@ -12,19 +13,19 @@ import java.util.List;
 public class PessoaModel {
 
     @Id // Designa a variável como a coluna de ID no banco
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Meio no qual o ID será gerado
-    private Long id;
+    @GeneratedValue // Meio no qual o ID será gerado
+    private UUID id;
 
     private String nome;
 
     @OneToMany // Relação um para vários
     private List<JobModel> jobModelList;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
